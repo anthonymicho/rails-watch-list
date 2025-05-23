@@ -1,0 +1,34 @@
+<div class="container my-5">
+  <h1 class="text-center pb-3"><strong>My list <%= @list.name %></strong></h1>
+
+  <div class="text-center d-flex align-items-center justify-content-between pb-3">
+    <%= link_to "Back to my lists", lists_path, class: "btn btn-secondary" %>
+    <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-primary" %>
+  </div>
+
+  <div class="row my-2">
+    <% @list.movies.each do |movie| %>
+      <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+      <div class="col-lg-4 mb-4">
+        <div class="bg-white rounded-4">
+          <%= image_tag movie.poster_url, alt: movie.title, class: "movie-img rounded-top card-img-top mb-4 rounded-top-4 small-img" %>
+          <div class="pb-3 px-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <h4 class="font-weight-bold"><strong><%= movie.title %></strong></h4>
+              <p class="font-weight-bold gap-2"><strong><i class="fa-solid fa-star text-warning"></i><%= movie.rating %></strong></p>
+            </div>
+            <div>
+              <p class="text-truncate"><%= movie.overview %></p>
+              <% if bookmark %>
+              <div class="d-flex align-items-center justify-content-between">
+                <p><%= bookmark.comment %></p>
+                 <p class="text-right flex-shrink-0"><%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></p>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

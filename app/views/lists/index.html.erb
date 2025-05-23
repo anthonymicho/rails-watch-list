@@ -1,0 +1,22 @@
+<div class="card-category mb-2" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
+    Save any kind of movie
+  </div>
+<div class="container py-3">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1>My lists</h1>
+    <%= link_to "Create a list", new_list_path, class: "btn btn-primary" %>
+  </div>
+  <div class="row">
+    <% @lists.each do |list| %>
+      <div class="col-md-3 mb-4">
+        <div class="card-product position-relative text-center text-white rounded-4">
+          <h2 class="card-product-text position-absolute"><%= link_to list.name, list_path(list), class: "text-white text-decoration-none" %></h2>
+          <div class="card-product-image">
+            <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="<%= list.name %>" />
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
